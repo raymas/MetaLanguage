@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<wheel:WheelSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wheel="http://wheel/1.0" xsi:schemaLocation="http://wheel/1.0 wheel.ecore" initialState="//@ownedState.0" finalState="//@ownedState.4">
+  <ownedState name="IDLE State">
+    <outgoingTransition target="//@ownedState.1"/>
+  </ownedState>
+  <ownedState name="State 1">
+    <outgoingTransition target="//@ownedState.2"/>
+  </ownedState>
+  <ownedState name="State 2">
+    <outgoingTransition target="//@ownedState.3"/>
+  </ownedState>
+  <ownedState name="State 3 ">
+    <outgoingTransition target="//@ownedState.4"/>
+  </ownedState>
+  <ownedState name="State 4">
+    <outgoingTransition target="//@ownedState.0"/>
+  </ownedState>
+</wheel:WheelSM>
