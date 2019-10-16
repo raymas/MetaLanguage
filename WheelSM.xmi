@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
-<wheel:WheelSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wheel="http://wheel/1.0" xsi:schemaLocation="http://wheel/1.0 wheel.ecore" initialState="//@ownedState.0" finalState="//@ownedState.4">
+<wheel:WheelSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:wheel="http://wheel/1.0" initialState="//@ownedState.0">
   <ownedState name="IDLE State">
-    <outgoingTransition target="//@ownedState.1"/>
+    <outgoingTransition speed="5" time="5" target="//@ownedState.1"/>
   </ownedState>
-  <ownedState name="State 1">
-    <outgoingTransition target="//@ownedState.2"/>
+  <ownedState name="State 1" incomingTransition="//@ownedState.0/@outgoingTransition">
+    <outgoingTransition speed="0" time="5" target="//@ownedState.2"/>
   </ownedState>
   <ownedState name="State 2">
-    <outgoingTransition target="//@ownedState.3"/>
+    <outgoingTransition speed="-10" time="4" target="//@ownedState.3"/>
   </ownedState>
   <ownedState name="State 3 ">
-    <outgoingTransition target="//@ownedState.4"/>
-  </ownedState>
-  <ownedState name="State 4">
-    <outgoingTransition target="//@ownedState.0"/>
+    <outgoingTransition speed="0" time="5" target="//@ownedState.0"/>
   </ownedState>
 </wheel:WheelSM>

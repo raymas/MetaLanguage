@@ -1,0 +1,46 @@
+@uri "http://wheel/1.0"
+package wheel;
+
+require "kermeta"
+require "http://www.eclipse.org/emf/2002/Ecore"
+class WheelSM
+{
+	reference initialState : State
+	reference finalState : State
+	attribute ownedState : State[0..*]#owningFSM
+
+	operation generation() is do
+		stdio.writeln("unsigned int state = 0;")
+		stdio.writeln("unsigned long long time = 0;")
+	
+		stdio.writeln("switch(state)")
+		stdio.writeln("{")
+	end
+
+}
+class State
+{
+	attribute name : ecore::EInt
+	reference incomingTransition : Transition
+	attribute outgoingTransition : Transition#Source
+	reference owningFSM : WheelSM[1..1]#ownedState
+	
+	operation generation() is do
+		stdio.writeln("case " + ecore::EString.valueof(name) + ":")
+		stdio.writeln("System.out.println(" + name + ");")
+	end
+
+}
+class Transition
+{
+	attribute speed : ecore::EString
+	attribute time : ecore::EString
+	reference target : State
+	reference Source : State[1..1]#outgoingTransition
+	
+	operation generation() is do
+		stdio.writeln("System.out.println(" + speed + ");")
+		stdio.writeln("")
+	end	
+	
+}
