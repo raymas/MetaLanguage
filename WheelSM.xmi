@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <wheel:WheelSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:wheel="http://wheel/1.0" initialState="//@ownedState.0">
-  <ownedState name="IDLE State">
-    <outgoingTransition speed="5" time="5" target="//@ownedState.1"/>
+  <ownedState name="0">
+    <outgoingTransition speed="50" time="5" target="//@ownedState.1"/>
   </ownedState>
-  <ownedState name="State 1" incomingTransition="//@ownedState.0/@outgoingTransition">
+  <ownedState name="1" incomingTransition="//@ownedState.0/@outgoingTransition">
     <outgoingTransition speed="0" time="5" target="//@ownedState.2"/>
   </ownedState>
-  <ownedState name="State 2">
-    <outgoingTransition speed="-10" time="4" target="//@ownedState.3"/>
+  <ownedState name="2">
+    <outgoingTransition speed="-70" time="4" target="//@ownedState.3"/>
   </ownedState>
-  <ownedState name="State 3 ">
-    <outgoingTransition speed="0" time="5" target="//@ownedState.0"/>
+  <ownedState name="3">
+    <outgoingTransition speed="25" time="5"/>
   </ownedState>
 </wheel:WheelSM>

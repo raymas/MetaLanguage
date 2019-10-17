@@ -1,0 +1,22 @@
+package metamodel;
+
+
+require kermeta
+require "./wheel.kmt"
+
+
+using kermeta::persistence
+class Main
+{
+	operation main() : Void is do 
+		var automate : wheel::WheelSM
+		// Create the repository, then the resource
+		var repository : EMFRepository init EMFRepository.new
+		var resource : EMFResource
+		resource ?= repository.createResource("./WheelSM.xmi", "./wheel.ecore")
+		resource.load
+		// Load the fsm (we get the instance)
+		automate ?= resource.one
+		automate.generation
+	end
+}

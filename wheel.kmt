@@ -10,24 +10,33 @@ class WheelSM
 	attribute ownedState : State[0..*]#owningFSM
 
 	operation generation() is do
-		stdio.writeln("unsigned int state = 0;")
-		stdio.writeln("unsigned long long time = 0;")
-	
-		stdio.writeln("switch(state)")
-		stdio.writeln("{")
+		stdio.writeln("state = 0")
+		stdio.writeln("isFinished_b = False")
+
+		stdio.writeln("while not isFinished_b:")
+		stdio.writeln("\tbw.ready()")
+
+		stdio.writeln("")
+
+		ownedState.each{s|
+			s.generation()
+		}
+
 	end
 
 }
 class State
 {
-	attribute name : ecore::EInt
+	attribute name : ecore::EString
 	reference incomingTransition : Transition
 	attribute outgoingTransition : Transition#Source
 	reference owningFSM : WheelSM[1..1]#ownedState
-	
+
 	operation generation() is do
-		stdio.writeln("case " + ecore::EString.valueof(name) + ":")
-		stdio.writeln("System.out.println(" + name + ");")
+		stdio.writeln("\tif state == " + name + ":")
+		if not (outgoingTransition.isVoid) then
+			outgoingTransition.generation()
+		end
 	end
 
 }
@@ -39,8 +48,32 @@ class Transition
 	reference Source : State[1..1]#outgoingTransition
 	
 	operation generation() is do
-		stdio.writeln("System.out.println(" + speed + ");")
-		stdio.writeln("")
-	end	
-	
+
+        var side : ecore::EString init ""
+
+        if speed.contains("-") then
+			speed := speed.replace("-", "")
+
+			side := ".backward()"
+        else
+			side := ".forward()"
+        end
+
+        stdio.writeln("\t\tbw.speed = " + speed)
+
+        stdio.writeln("")
+
+        stdio.writeln("\t\tbw" + side)
+
+        stdio.writeln("\t\ttime.sleep(" + time + ")")
+
+        // dangerous but you know...
+        if not (target.isVoid) then
+			stdio.writeln("\t\tstate = " + target.name)
+		else
+			stdio.writeln("\t\tbw.stop()")
+			stdio.writeln("")
+			stdio.writeln("\t\tisFinished_b = true")
+        end
+	end
 }
